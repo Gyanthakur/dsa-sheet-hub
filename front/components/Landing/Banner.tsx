@@ -2,7 +2,7 @@ import { FileCode } from "@phosphor-icons/react/dist/ssr";
 
 export default function Banner() {
   return (
-    <div className="flex flex-col text-center justify-center mt-16 sm:mt-14 items-center min-h-[300px] sm:min-h-[600px]">
+    <div className="flex flex-col text-center justify-center mt-16 sm:mt-14 items-center min-h-[450px] sm:min-h-[600px]">
       <div className="w-full flex flex-col gap-4">
         <div className="px-4 py-1 mx-auto transition duration-200 border border-blue-300 rounded-full hover:border-blue-500 w-fit">
           <p className="text-xs sm:text-sm font-semibold text-blue-700">

@@ -16,12 +16,7 @@ const sheetSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    id: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    title:{
+    title: {
         type: String,
         required: true,
         unique: true
@@ -31,20 +26,20 @@ const sheetSchema = new mongoose.Schema({
         ref: 'User',
         required: true
     },
-    starCount: {
-        type: Number,
-        default: 0
+    dateCreated: {
+        type: Date,
+        default: Date.now
     },
-    questionCount: {
-        type: Number,
-        default: 0
+    isPublic: {
+        type: Boolean,
+        default: false
     },
     questions: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Question',
         default: []
     }]
-});
+}, { timestamps: true });
 
 // Exporting the model
 export default mongoose.model('Sheet', sheetSchema);

@@ -15,27 +15,34 @@ const problemSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    id: {
-        type: String,
-        required: true,
-        unique: true
+    addedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     },
-    link: {
+    url1: {
         type: String,
         required: true
+    },
+    url2: {
+        type: String,
+        default: ""
     },
     tags: [{
         type: String
     }],
     difficulty: {
         type: String,
-        required: true
+        default: "Easy"
     },
     title: {
         type: String,
-        required: true
+        unique: true,
+        required: true,
     }
+}, {
+    timestamps: true
 });
 
 // Exporting the model
-export default mongoose.model('Problem', problemSchema);
+export default mongoose.model('Question', problemSchema);

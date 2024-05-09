@@ -5,11 +5,6 @@
 import mongoose from 'mongoose';
 
 const responseSchema = new mongoose.Schema({
-    id: {
-        type: String,
-        required: true,
-        unique: true
-    },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -25,6 +20,6 @@ const responseSchema = new mongoose.Schema({
         ref: 'Question',
         required: true
     }
-});
+}, { timestamps: true });
 
 export default mongoose.model('Response', responseSchema);

@@ -4,11 +4,6 @@
 
 import mongoose from 'mongoose';
 const starredSchema = new mongoose.Schema({
-    id: {
-        type: String,
-        required: true,
-        unique: true
-    },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -19,6 +14,9 @@ const starredSchema = new mongoose.Schema({
         ref: 'Sheet',
         required: true
     }
-});
+},
+    {
+        timestamps: true
+    });
 
 export default mongoose.model('Starred', starredSchema);
