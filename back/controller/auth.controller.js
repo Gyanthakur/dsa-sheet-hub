@@ -24,13 +24,13 @@ export async function Register(req, res) {
                     password,
                     process.env.CRYPTOJS_SEC_KEY
                 ).toString(),
-                profile: res.gender === "female" ? girlProfilePic : boyProfilePic
+                avatar: res.gender === "female" ? girlProfilePic : boyProfilePic
             });
             const result = await newuser.save();
             if (result)
                 return res
                     .status(201)
-                    .json({ status: 201, token: tokengenerator(result._id) });
+                    .json({ status: 201, token: tokengenerator(result._id), user: result });
             else
                 return res
                     .status(500)
@@ -42,8 +42,8 @@ export async function Register(req, res) {
 }
 export async function Login(req, res) {
     try {
-        const { email, password, username } = req.body;
-        const user = await userModel.findOne({ $or: [{ email: email }, { username: username }] });
+        const { cred, password } = req.body;
+        const user = await userModel.findOne({ $or: [{ email: cred }, { username: cred }] });
         if (!user)
             return res
                 .status(401)
@@ -61,7 +61,7 @@ export async function Login(req, res) {
             else
                 return res
                     .status(200)
-                    .json({ status: 200, token: tokengenerator(user._id) });
+                    .json({ status: 200, token: tokengenerator(user._id), user: user });
         }
     } catch (err) {
         return res.status(500).json({ status: 500, message: err.message });
@@ -112,6 +112,20 @@ export async function UpdatePassword(req, res) {
         return res.status(500).json({ status: 500, message: error.message });
     }
 }
+
+export async function UserSession(req, res) {
+    try {
+        const user = await userModel.findById(req.user._id).select("-password -updatedAt -__v -_id");
+        if (user)
+            return res.status(200).json({ status: 200, user: user });
+        else
+            return res.status(404).json({ status: 404, message: "User not found" });
+    } catch (error) {
+        return res.status(500).json({ status: 500, message: error.message });
+    }
+}
 const tokengenerator = (_id) => {
     return jwt.sign({ _id: _id }, process.env.JWT_SEC_KEY, { expiresIn: "10d" });
 };
+
+

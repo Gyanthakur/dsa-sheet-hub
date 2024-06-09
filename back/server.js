@@ -9,6 +9,7 @@ import AuthRouter from "./routes/v1/auth.routes.js";
 import SheetRouter from "./routes/v1/sheet.routes.js";
 import QuestionRouter from "./routes/v1/question.routes.js";
 import StarredRouter from "./routes/v1/starred.routes.js";
+import DataRouter from "./routes/v1/data.routes.js";
 const app = express();
 const PORT = process.env.PORT || 5000;
 app.use(cors());
@@ -42,6 +43,7 @@ app.use("/api/v1/auth", AuthRouter);
 app.use("/api/v1/sheets", SheetRouter);
 app.use("/api/v1/questions", QuestionRouter);
 app.use("/api/v1/starred", StarredRouter);
+app.use("/api/v1/data", DataRouter)
 // API Documentation
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // 404 Route

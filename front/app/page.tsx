@@ -5,11 +5,9 @@ import TopSheets from "@/components/Landing/TopSheets";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen bg-gradient-to-b from-blue-200 to-gray-50 via-bg-white overflow-hidden w-full flex-col items-center gap-4 sm:px-8 px-4">
-      <Header />
+    <main className="flex min-h-screen overflow-hidden w-full flex-col items-center gap-4 sm:px-8 px-4">
       <Banner />
       <TopSheets />
-      <Footer />
     </main>
   );
 }

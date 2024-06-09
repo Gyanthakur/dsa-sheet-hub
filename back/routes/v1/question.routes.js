@@ -60,12 +60,28 @@
  *         description: No questions found
  */
 
+/**
+ * @swagger
+ * /api/v1/questions/getuserquestions:
+ *   get:
+ *     summary: Get user's all questions
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       '200':
+ *         description: List of questions
+ *       '404':
+ *         description: No questions found
+ */
+
 import express from 'express';
 import { verifyToken } from '../../middleware/verifyToken.middleware.js';
-import createQuestion, { deleteQuestion, getQuestions } from '../../controller/question.controller.js';
+import createQuestion, { deleteQuestion, deleteQuestions, getQuestions } from '../../controller/question.controller.js';
 const router = express.Router();
 
 router.post('/create', verifyToken, createQuestion)
 router.delete("/delete/:id", verifyToken, deleteQuestion)
 router.get("/getquestions", verifyToken, getQuestions)
+router.get("/getuserquestions", verifyToken, getQuestions)
+router.post("/deletequestions", verifyToken, deleteQuestions)
 export default router;

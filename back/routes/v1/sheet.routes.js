@@ -82,7 +82,7 @@
 /**
  * @swagger
  * /api/sheets/addquestion:
- *   post:
+ *   put:
  *     summary: Add a question to a sheet
  *     security:
  *       - bearerAuth: []
@@ -110,7 +110,7 @@
 /**
  * @swagger
  * /api/sheets/removequestion:
- *   delete:
+ *   put:
  *     summary: Remove a question from a sheet
  *     security:
  *       - bearerAuth: []
@@ -158,15 +158,17 @@
 
 import express from 'express';
 const router = express.Router();
-import { addQuestionToSheet, createSheet, deleteSheet, getSheet, getSheets, getTrendingSheets, removeQuestionFromSheet } from '../../controller/sheet.controller.js';
+import { addQuestionToSheet, createSheet, deleteSheet, getSheet, getSheets, getTrendingSheets, getUserSheets, removeQuestionFromSheet } from '../../controller/sheet.controller.js';
 import { verifyToken } from '../../middleware/verifyToken.middleware.js';
 
 router.post("/create", verifyToken, createSheet)
 router.get("/getsheet/:id", getSheet)
 router.get("/getsheets", getSheets)
 router.delete("/delete/:id", verifyToken, deleteSheet)
-router.post("/addquestion", verifyToken, addQuestionToSheet)
-router.delete("/removequestion", verifyToken, removeQuestionFromSheet)
+router.put("/addquestion", verifyToken, addQuestionToSheet)
+router.put("/removequestion", verifyToken, removeQuestionFromSheet)
 router.get("/trendingsheets", getTrendingSheets)
+router.get("/getusersheets", verifyToken, getUserSheets)
 export default router;
+
 

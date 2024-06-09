@@ -9,6 +9,7 @@
 
 
 import mongoose from 'mongoose';
+import { type } from 'os';
 
 
 const sheetSchema = new mongoose.Schema({
@@ -21,14 +22,14 @@ const sheetSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    description: {
+        type: String,
+        default: ''
+    },
     addedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
-    },
-    dateCreated: {
-        type: Date,
-        default: Date.now
     },
     isPublic: {
         type: Boolean,
@@ -38,7 +39,11 @@ const sheetSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Question',
         default: []
-    }]
+    }],
+    starCount: {
+        type: Number,
+        default: 0
+    }
 }, { timestamps: true });
 
 // Exporting the model

@@ -32,12 +32,35 @@ export async function deleteQuestion(req, res) {
     }
 }
 
+export async function deleteQuestions(req, res) {
+    try {
+        const selectedQuestions = req.body.ids;
+        const questions = await questionSchema.deleteMany({ _id: { $in: selectedQuestions }, addedBy: req.user._id });
+        if (questions.deletedCount === 0)
+            return res.status(404).json({ error: "No Questions Found" });
+        res.status(200).json({ message: "Questions deleted successfully" });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ error: error.message });
+    }
+}
 export async function getQuestions(req, res) {
     try {
-        const questions = await questionSchema.find();
+        const questions = await questionSchema.find().select("-__v ");
         if (!questions)
             return res.status(404).json({ error: "No Questions Found" });
         res.status(200).json({ questions });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ error: error.message });
+    }
+}
+export async function getUserQuestions(req, res) {
+    try {
+        const questions = await questionSchema.find({ addedBy: req.user._id });
+        if (!questions)
+            return res.status(404).json({ error: "No Questions Found" });
+        res.status(200).json({ status: 200, questions });
     } catch (error) {
         console.log(error);
         return res.status(500).json({ error: error.message });

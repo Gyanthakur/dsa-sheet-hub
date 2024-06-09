@@ -25,7 +25,7 @@
  */
 /**
  * @swagger
- * /api/auth/signin:
+ * /api/auth/login:
  *   post:
  *     summary: Log in a user
  *     requestBody:
@@ -88,10 +88,11 @@
  */
 import express from "express";
 const router = express.Router();
-import { Register, Login, DeleteUser, UpdatePassword } from "../../controller/auth.controller.js";
+import { Register, Login, DeleteUser, UpdatePassword, UserSession } from "../../controller/auth.controller.js";
 import { verifyToken } from "../../middleware/verifyToken.middleware.js";
 router.post("/signup", Register);
-router.post("/signin", Login);
+router.post("/login", Login);
 router.delete("/deleteuser", verifyToken, DeleteUser);
 router.put("/updatepassword", verifyToken, UpdatePassword);
+router.get("/getsession", verifyToken, UserSession)
 export default router;

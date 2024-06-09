@@ -33,7 +33,7 @@ const problemSchema = new mongoose.Schema({
     }],
     difficulty: {
         type: String,
-        default: "Easy"
+        default: "easy"
     },
     title: {
         type: String,

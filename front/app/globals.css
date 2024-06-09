@@ -2,3 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+    /* Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+  
+    .no-scrollbar {
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+}
+
+/* Track
+::-webkit-scrollbar-track {
+    background: #076b34;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #0dae56;
+    border-radius: 4px;
+} */

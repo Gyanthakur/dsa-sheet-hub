@@ -12,7 +12,7 @@ import Link from "next/link";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="border-t-2 mt-8 py-2 w-full flex flex-col md:flex-row justify-between">
+    <footer className=" w-full px-4 flex flex-col md:flex-row justify-between">
       <div className="">
         <div className="py-4 text-center">
           <div className="flex ">
@@ -30,7 +30,7 @@ const Footer: React.FC = () => {
 
       <div></div>
 
-      <div className="flex sm:hidden flex-col justify-between">
+      <div className="flex hidden px-4 flex-col justify-between">
         <h2 className="font-semibold">Contributors</h2>
         <ul className=" ">
           <li>
